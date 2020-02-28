@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Reactive Form</h2>
+  <form [formGroup]="validationForm" (ngSubmit)="OnSubmit()">
+
+    <div class="Selected">
+      <label><b>Select field :</b></label><br>
+      <input id="name" type="radio" value="name" name="selected" (click)="buildForm('name')" formControlName="selected">
+      <label for="name">Name</label>
+      <input id="email" type="radio" value="email" name="selected" (click)="buildForm('email')" formControlName="selected">
+      <label for="email">Email</label>
+      <input id="userName" type="radio" value="userName" name="selected" (click)="buildForm('userName')" formControlName="selected">
+      <label for="userName">User Name</label>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><b>Name : </b></label>
+          <input type="text" formControlName="name" class="form-control" placeholder="Enter Name">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><b>Email : </b></label>
+          <input type="text" formControlName="email" class="form-control" placeholder="Enter email">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><b>User name : </b></label>
+          <input type="text" formControlName="userName" class="form-control" placeholder="Enter username">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><b>Mobile No. : </b></label>
+          <input type="number" formControlName="mobile" class="form-control" maxlength="10" minlength="0"
+            placeholder="Enter mobile no.">
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="(validationForm.get('mobile').dirty || validationForm.get('mobile').touched) && validationForm.get('mobile').errors">
+      <span class="text-danger">Mobile no. is required</span>
+    </div>
+    <div
+      *ngIf="(validationForm.get(selected).dirty || validationForm.get(selected).touched) && validationForm.get(selected).errors">
+      <span class="text-danger">{{ selected }} is required</span>
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-success"
+      [disabled]="!(validationForm.get(selected).valid && validationForm.get('mobile').valid)">Submit</button>
+
+  </form>
+</div>
